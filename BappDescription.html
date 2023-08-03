@@ -1,0 +1,11 @@
+<p>PESD Exporter is a Burp Suite extension to visualize web traffic in a way that facilitates the analysis and reporting in scenarios with complex functional flows. It converts Burp Suite's proxy traffic into interactive sequence diagrams defined as Proxy Enriched Sequence Diagrams (PESD).
+While classic sequence diagrams for software engineering are meant for an abstract visualization and all the information is carried by the diagram itself, PESD is designed to include granular information related to the underlying HTTP traffic being represented in the form of explorable metadata.</p>
+
+<p>Additionally, it executes of structured templates on the generated format to enrich its contents. The Extension currently supports standard OAuth2/OpenID/SAML matching. A frame and custom flags are added to the diagram to surround the standard flows and enrich its contents.
+We strongly recommend reading the introduction article containing a detailed description and usage examples directly from our testing activities - <a href="https://blog.doyensec.com/2023/02/14/pesd-extension-public-release.html">https://blog.doyensec.com/2023/02/14/pesd-extension-public-release.html</a></p>
+
+<p>How it works:</p>
+<p>Once loaded, sending items to the extension will directly result in an export with all the active settings. The export is saved locally and opened in the browser.</p>
+<p>Traffic items are parsed to generate: MermaidJS Markdown syntax for sequence diagrams and traffic metadata. The MD and metadata JSON are injected in the export.html template that will render the final explorable diagram by combining MermaidJS with dynamic popovers according to the metadata.<p>
+
+<p>For more information, please refer to the GitHub repository.</p>

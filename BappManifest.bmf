@@ -1,0 +1,13 @@
+Uuid: 3c1ba693b1604256973c8b2414acb5a2
+ExtensionType: 1
+Name: Proxy Enriched Sequence Diagrams Exporter
+RepoName: pesd-exporter
+ScreenVersion: 1.2.1
+SerialVersion: 1
+MinPlatformVersion: 0
+ProOnly: False
+Author: Francesco Lacerenza
+ShortDescription: Converts Burp Suite's proxy traffic into interactive diagrams
+EntryPoint: build/libs/pesd-exporter-all.jar
+BuildCommand: ./gradlew fatJar
+SupportedProducts: Pro, Community
