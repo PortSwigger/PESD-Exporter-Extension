@@ -2,8 +2,8 @@ Uuid: 3c1ba693b1604256973c8b2414acb5a2
 ExtensionType: 1
 Name: Proxy Enriched Sequence Diagrams Exporter
 RepoName: pesd-exporter
-ScreenVersion: 1.2.1
-SerialVersion: 1
+ScreenVersion: 2.0
+SerialVersion: 2
 MinPlatformVersion: 0
 ProOnly: False
 Author: Francesco Lacerenza

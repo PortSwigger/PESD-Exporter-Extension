@@ -4,8 +4,55 @@ While classic sequence diagrams for software engineering are meant for an abstra
 <p>Additionally, it executes of structured templates on the generated format to enrich its contents. The Extension currently supports standard OAuth2/OpenID/SAML matching. A frame and custom flags are added to the diagram to surround the standard flows and enrich its contents.
 We strongly recommend reading the introduction article containing a detailed description and usage examples directly from our testing activities - <a href="https://blog.doyensec.com/2023/02/14/pesd-extension-public-release.html">https://blog.doyensec.com/2023/02/14/pesd-extension-public-release.html</a></p>
 
-<p>How it works:</p>
-<p>Once loaded, sending items to the extension will directly result in an export with all the active settings. The export is saved locally and opened in the browser.</p>
-<p>Traffic items are parsed to generate: MermaidJS Markdown syntax for sequence diagrams and traffic metadata. The MD and metadata JSON are injected in the export.html template that will render the final explorable diagram by combining MermaidJS with dynamic popovers according to the metadata.<p>
+<h2>Usage</h2>
 
-<p>For more information, please refer to the GitHub repository.</p>
+<p>Select and send specific traffic entries from Burp Suite Tabs to the Exporter tab.</p>
+
+<p>Specify a mode of operation for the export:</p>
+
+<ul>
+	<li><b>Domains as Actors</b> - Each domain involved in the traffic is represented as an actor in the diagram. Suitable for multi-domain flows analysis</li>
+	<li><b>Endpoints as Actors</b> - Each endpoint (path) involved in the traffic is represented as an actor in the diagram. Suitable for single-domain flows analysis</li>
+</ul>
+
+<p>Auto-Export is enabled by default, sending items to the extension will directly result in a export. User is redirected to the Browser view and the items are cleaned after the export within the extension.</p>
+
+<h2>Export capabilities</h2>
+
+<ul>
+	<li>Expandable Metadata. Underlined flags can be clicked to show the underlying metadata from the traffic in a scrollable popover</li>
+	<li>Masked Randoms in URL Paths. UUIDs and pseudorandom strings recognized inside path segments are mapped to variable names <code>&lt;UUID_N&gt;</code> / <code>&lt;VAR_N&gt;</code>. The re-renderization will reshape the diagram to improve flow readability. Every occurrency with the same value maintains the same name</li>
+	<li>Notes. Comments from Burp Suite are converted to notes in the resulting diagram. Use <code>&lt;br&gt;</code> in Burp Suite comments to obtain multi-line notes in PESD exports</li>
+	<li>Theme. Use MermaidJS theme veriables to build your own sequence diagram style set in the extension</li>
+	<li>Embedded MD editor. Edit the generated diagram directly in the export to add details (e.g. internal calls to microservices, notes, everything allowed by mermaid JS)</li>
+	<li>Highlight colors from Burpsuite are ported to the sequence diagram arrow colors</li>
+	<li>Invert Proxy History order. If you have the last request on top, activate it</li>
+	<li>Save as : SVG, Markdown, JSON metadata, explorable HTML</li>
+</ul>
+
+<h2>Extending the diagram, syntax and metadata with Templates</h2>
+
+<p>The Extension currently supports the following templates :</p>
+<ul>
+	<li>OAuth2 / OpenID Connect. The template matches standard OAuth2/OpenID Connect flows and adds related flags + flow frame.<br>
+		Oauth2 supported flows :
+		<ul>
+			<li>Implicit Grant</li>
+			<li>Code Grant</li>
+		</ul>
+		OpenID supported flows :
+		<ul>
+			<li>Code Grant</li>
+			<li>Implicit Grant</li>
+			<li>Hybrid flow</li>
+		</ul>
+		Respectively based on rfc6749 and openid-connect-core-1_0</li>
+	<li>SAML SSO. The template matches Single-Sign-On flows with SAML V2.0 and adds related flags + flow frame.<br>
+		Based on SAML V2.0 , supported flows:
+		<ul>
+			<li>SP-initiated SSO using a Redirect Binding for the SP-to-IdP message and a POST Binding for the IdP-to-SP message</li>
+			<li>SP-initiated SSO using a POST Binding for the message and an Artifact Binding for the message</li>
+			<li>IDP-initiated SSO using a POST Binding for the IdP-to-SP message; no SP-to-IdP message is involved</li>
+		</ul>
+	</li>
+</ul>
